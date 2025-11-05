@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    { "item": "minecraft:ender_eye" },
+    { "item": "iceandfire:lightning_dragon_heart" }
+  ],
+  "result": {
+    "item": "eyeofdragons:eye_of_lightningdragon",
+    "count": 1
+  }
+}

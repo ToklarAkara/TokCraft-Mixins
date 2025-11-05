@@ -1,0 +1,16 @@
+[
+  {
+    "modid": "tokcraftmixins",
+    "name": "TokCraft Mixins",
+    "description": "Scoped mixins for healing logic, registry fixes, and attribute control.",
+    "version": "1.0",
+    "mcversion": "1.12.2",
+    "url": "",
+    "updateUrl": "",
+    "authorList": ["Sam"],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
