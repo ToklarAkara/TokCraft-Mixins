@@ -61,12 +61,16 @@ dependencies {
 
     implementation name: 'BiomesOPlenty-1.12.2-7.0.1.2445-universal'
     implementation name: '`FermiumBooter-1.3.2'
-    implementation name: 'eyeofdragons-0.0.2 (2)'
+    implementation name: 'eyeofdragons-0.0.2'
     implementation name: 'AntiqueAtlasAutoMarker-1.4.3'
     implementation name: 'Ice and Fire-2.1.7'
     implementation name: 'lycanitesmobs-1.12.2-2.0.8.10'
     implementation name: 'antiqueatlas-1.12.2-4.6.3'
     implementation name: 'Socketed-1.0.0'
+    implementation name: 'ctsetbonus-1.0.0'
+    implementation name: 'CraftTweaker2-1.12-4.1.20.704'
+    implementation name: 'SetBonus-1.12.2.040'
+
 }
 
 mixin {

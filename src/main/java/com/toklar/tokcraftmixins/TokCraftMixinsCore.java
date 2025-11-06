@@ -20,6 +20,9 @@ public class TokCraftMixinsCore implements IFMLLoadingPlugin {
 
 	    // Conditionally load Socketed mixins
 	    FermiumRegistryAPI.enqueueMixin(true, "mixins.tokcraftmixins.socketed.json", () -> Loader.isModLoaded("socketed"));
+
+	    // Conditionally load CTSetBonus mixins
+	    //FermiumRegistryAPI.enqueueMixin(true, "mixins.tokcraftmixins.ctsetbonus.json", () -> Loader.isModLoaded("ctsetbonus"));
 	}
 
     @Override

@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 public class TokCraftMixins {
     public static final String MODID = "tokcraftmixins";
     public static final String NAME = "TokCraft Mixins";
-    public static final String VERSION = "1.0";
+    public static final String VERSION = "1.1";
 
     @SidedProxy(
         clientSide = "com.toklar.tokcraftmixins.proxy.ClientProxy",
@@ -22,6 +22,9 @@ public class TokCraftMixins {
     public void preInit(FMLPreInitializationEvent event) {
         System.out.println("TokCraft Mixins loaded.");
         proxy.preInit(event);
+       // try {
+       //     Class.forName("com.toklar.tokcraftmixins.ctsetbonus.SetTweaksExpansion");
+      //  } catch (ClassNotFoundException ignored) {}
     }
 
     @Mod.EventHandler
