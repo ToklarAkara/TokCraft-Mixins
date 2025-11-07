@@ -1,16 +1,19 @@
 package com.toklar.tokcraftmixins;
 
+import com.toklar.tokcraftmixins.helpers.BlocklistConfig;
+import com.toklar.tokcraftmixins.helpers.ItemDummy;
 import com.toklar.tokcraftmixins.proxy.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 @Mod(modid = TokCraftMixins.MODID, name = TokCraftMixins.NAME, version = TokCraftMixins.VERSION)
 public class TokCraftMixins {
     public static final String MODID = "tokcraftmixins";
     public static final String NAME = "TokCraft Mixins";
-    public static final String VERSION = "1.1";
+    public static final String VERSION = "1.3";
 
     @SidedProxy(
         clientSide = "com.toklar.tokcraftmixins.proxy.ClientProxy",
@@ -22,13 +25,12 @@ public class TokCraftMixins {
     public void preInit(FMLPreInitializationEvent event) {
         System.out.println("TokCraft Mixins loaded.");
         proxy.preInit(event);
-       // try {
-       //     Class.forName("com.toklar.tokcraftmixins.ctsetbonus.SetTweaksExpansion");
-      //  } catch (ClassNotFoundException ignored) {}
+        ForgeRegistries.ITEMS.register(ItemDummy.INSTANCE);
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         proxy.init(event);
+
     }
 }

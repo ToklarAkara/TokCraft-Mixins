@@ -70,7 +70,9 @@ dependencies {
     implementation name: 'ctsetbonus-1.0.0'
     implementation name: 'CraftTweaker2-1.12-4.1.20.704'
     implementation name: 'SetBonus-1.12.2.040'
-
+    implementation name: 'disenchanter[1.12]1.8'
+    implementation name: 'TConstruct-1.12.2-2.13.0.183'
+    implementation name: 'Mantle-1.12-1.3.3.55'
 }
 
 mixin {

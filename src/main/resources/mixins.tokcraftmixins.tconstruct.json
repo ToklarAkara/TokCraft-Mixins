@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.toklar.tokcraftmixins.mixin.tconstruct",
+  "refmap": "mixins.tokcraftmixins.refmap.json",
+  "target": "1.12.2",
+  "mixins": [
+    "MixinTConstruct",
+    "MixinTinkerTools"
+  ],
+  "client": [],
+  "server": []
+}
