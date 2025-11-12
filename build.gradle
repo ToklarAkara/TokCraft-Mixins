@@ -73,6 +73,9 @@ dependencies {
     implementation name: 'disenchanter[1.12]1.8'
     implementation name: 'TConstruct-1.12.2-2.13.0.183'
     implementation name: 'Mantle-1.12-1.3.3.55'
+    implementation name: 'RLTweaker-1.12.2-0.7.5'
+    implementation name: 'toklar-1.2.3'
+    implementation name: 'champions-1.12.2-1.0.11.10'
 }
 
 mixin {

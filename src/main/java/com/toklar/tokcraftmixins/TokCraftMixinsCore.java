@@ -46,6 +46,11 @@ public class TokCraftMixinsCore implements IFMLLoadingPlugin {
         	final boolean enableTConstructToolBlocker = config.getBoolean("EnableTConstructToolBlockerMixins", Configuration.CATEGORY_GENERAL, true,
         		    "Blocks registration of specific TConstruct tools and parts based on config. Prevents GUI and registry clutter.");
 
+//        	final boolean enableRLTweakerTransformerFixes = config.getBoolean("EnableRLTweakerTransformerFixes", Configuration.CATEGORY_GENERAL, true,
+//        		    "Prevents a crash in RLTweaker when its enchantment blacklist logic fails due to missing bytecode.");
+        	
+        	final boolean enableChampionLootPatch = config.getBoolean("EnableChampionLootPatchMixin", Configuration.CATEGORY_GENERAL, true,
+        	        "Overrides Champions loot attribution logic to allow summon-based drops when wearing bronze or toklar armor.");
 
 
         config.save();
@@ -74,6 +79,15 @@ public class TokCraftMixinsCore implements IFMLLoadingPlugin {
             FermiumRegistryAPI.enqueueMixin(true, "mixins.tokcraftmixins.tconstruct.json",
                 () -> Loader.isModLoaded("tconstruct"));
         }
+//        if (enableRLTweakerTransformerFixes) {
+//            FermiumRegistryAPI.enqueueMixin(true, "mixins.tokcraftmixins.rltweaker.json",
+//                () -> Loader.isModLoaded("rltweaker"));
+//        }      
+        if (enableChampionLootPatch) {
+            FermiumRegistryAPI.enqueueMixin(true, "mixins.tokcraftmixins.champions.json",
+                () -> Loader.isModLoaded("champions"));
+        }
+
     }
 
 
