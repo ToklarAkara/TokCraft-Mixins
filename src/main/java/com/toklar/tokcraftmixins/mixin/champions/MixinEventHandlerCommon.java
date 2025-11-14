@@ -49,16 +49,8 @@ public abstract class MixinEventHandlerCommon {
         if (!ConfigHandler.lootFake && source.getTrueSource() instanceof net.minecraftforge.common.util.FakePlayer) return;
 
         // Try to resolve summon owner
-        Entity immediate = source.getImmediateSource();
-        EntityPlayer owner = (immediate instanceof EntityLivingBase)
-            ? SummonDamageBuffHandler.getOwnerFromEntity((EntityLivingBase) immediate)
-            : null;
-
-        if (owner == null ||
-            !SummonDamageBuffHandler.isHuman(owner) ||
-            (!SummonDamageBuffHandler.isWearingFullBronzeSet(owner) && !SummonDamageBuffHandler.isWearingFullToklarSet(owner))) {
-            return; // Not a valid summon kill
-        }
+        EntityPlayer owner = SummonDamageBuffHandler.resolveValidSummonOwner(source);
+        if (owner == null) return;
 
         // Valid summon kill — rerun Champions loot logic with owner as killer
         IChampionship chp = CapabilityChampionship.getChampionship((EntityLiving) entity);

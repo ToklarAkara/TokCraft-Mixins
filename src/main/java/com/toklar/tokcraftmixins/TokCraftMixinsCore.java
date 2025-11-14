@@ -52,7 +52,9 @@ public class TokCraftMixinsCore implements IFMLLoadingPlugin {
         	final boolean enableChampionLootPatch = config.getBoolean("EnableChampionLootPatchMixin", Configuration.CATEGORY_GENERAL, true,
         	        "Overrides Champions loot attribution logic to allow summon-based drops when wearing bronze or toklar armor.");
 
-
+        	final boolean enableBlightKillPatch = config.getBoolean("EnableBlightKillPatchMixin", Configuration.CATEGORY_GENERAL, true,
+        		    "Overrides Scaling Health Blight kill logic to allow summon-based heart drops when wearing bronze or toklar armor.");
+        	
         config.save();
 
         if (enableDisenchanter) {
@@ -86,6 +88,10 @@ public class TokCraftMixinsCore implements IFMLLoadingPlugin {
         if (enableChampionLootPatch) {
             FermiumRegistryAPI.enqueueMixin(true, "mixins.tokcraftmixins.champions.json",
                 () -> Loader.isModLoaded("champions"));
+        }
+        if (enableBlightKillPatch) {
+            FermiumRegistryAPI.enqueueMixin(true, "mixins.tokcraftmixins.scalinghealth.json",
+                () -> Loader.isModLoaded("scalinghealth"));
         }
 
     }

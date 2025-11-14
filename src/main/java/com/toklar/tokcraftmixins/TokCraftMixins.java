@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 public class TokCraftMixins {
     public static final String MODID = "tokcraftmixins";
     public static final String NAME = "TokCraft Mixins";
-    public static final String VERSION = "1.5.1";
+    public static final String VERSION = "1.6.1";
 
     @SidedProxy(
         clientSide = "com.toklar.tokcraftmixins.proxy.ClientProxy",
