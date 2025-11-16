@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.toklar.tokcraftmixins.mixin.lycanitesmobs",
+  "refmap": "mixins.tokcraftmixins.refmap.json",
+  "target": "1.12.2",
+  "mixins": [
+    "MixinGameEventListener"
+  ],
+  "client": [],
+  "server": []
+}

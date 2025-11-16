@@ -8,9 +8,12 @@ import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin.MCVersion;
 import org.spongepowered.asm.launch.MixinBootstrap;
 
 import com.toklar.tokcraftmixins.helpers.BlocklistConfig;
+import com.toklar.tokcraftmixins.mixin.vanilla.MixinEntityLivingBase;
 
 import java.io.File;
 import java.util.Map;
+import com.toklar.tokcraftmixins.AttributionConfig;
+import com.toklar.tokcraftmixins.config.InfernalTierScaling;
 
 @IFMLLoadingPlugin.MCVersion("1.12.2")
 @IFMLLoadingPlugin.Name("TokCraftMixinsCore")
@@ -21,7 +24,7 @@ public class TokCraftMixinsCore implements IFMLLoadingPlugin {
 
         Configuration config = new Configuration(new File("config/tokcraftmixins.cfg"));
         config.load();
-
+        org.spongepowered.asm.mixin.Mixins.addConfiguration("mixins.tokcraftmixins.vanilla.json");
         // toncstruct settings
         config.getBoolean("tconstruct_melee_weapons", "pulses", true, "Block this TConstruct pulse");
         config.getBoolean("tconstruct_ranged_weapons", "pulses", true, "Block this TConstruct pulse");
@@ -55,6 +58,40 @@ public class TokCraftMixinsCore implements IFMLLoadingPlugin {
         	final boolean enableBlightKillPatch = config.getBoolean("EnableBlightKillPatchMixin", Configuration.CATEGORY_GENERAL, true,
         		    "Overrides Scaling Health Blight kill logic to allow summon-based heart drops when wearing bronze or toklar armor.");
         	
+        	final boolean enableLycanitesAttributionPatch = config.getBoolean("EnableLycanitesAttributionPatchMixin", Configuration.CATEGORY_GENERAL, true,
+        		    "Overrides Lycanites GameEventListener attribution so summon kills are credited to the player owner.");
+
+        	final boolean enableVanillaAttributionPatch = config.getBoolean("EnableVanillaAttributionPatchMixin",Configuration.CATEGORY_GENERAL,true,
+        		    "Injects into EntityLivingBase.onDeath so summon kills are credited to the player owner.");
+
+        	final boolean enableInfernalMobsScalingPatch = config.getBoolean("EnableInfernalMobsScalingPatchMixin", Configuration.CATEGORY_GENERAL, true,
+        		    "Injects into InfernalMobsCore.processEntitySpawn so rarity divisors scale with ScalingHealth difficulty.(configurable)");
+
+
+        	AttributionConfig.ENABLE_VANILLA_ATTRIBUTION_PATCH = enableVanillaAttributionPatch;
+
+        	final String[] infernalTierSpawnModifiers = config.getStringList(
+        		    "InfernalTierSpawnModifiers",
+        		    "infernalmobs",
+        		    new String[] {
+        		    	    "rare;0.0048",   // 0.48% per difficulty → 9.6% at 20
+        		    	    "ultra;0.0013",  // 0.13% per difficulty → 2.6% at 20
+        		    	    "infernal;0.0005"// 0.05% per difficulty → 1% at 20
+        		    	},
+        		    "Per-difficulty increments for InfernalMobs tiers (tier;increment). Tiers: rare, ultra, infernal."
+        		);
+        	for (String entry : infernalTierSpawnModifiers) {
+        	    String[] parts = entry.split(";");
+        	    if (parts.length == 2) {
+        	        double val = Double.parseDouble(parts[1]);
+        	        switch (parts[0].toLowerCase()) {
+        	            case "rare":     InfernalTierScaling.rareIncrement = val; break;
+        	            case "ultra":    InfernalTierScaling.ultraIncrement = val; break;
+        	            case "infernal": InfernalTierScaling.infernalIncrement = val; break;
+        	        }
+        	    }
+        	}
+
         config.save();
 
         if (enableDisenchanter) {
@@ -92,6 +129,16 @@ public class TokCraftMixinsCore implements IFMLLoadingPlugin {
         if (enableBlightKillPatch) {
             FermiumRegistryAPI.enqueueMixin(true, "mixins.tokcraftmixins.scalinghealth.json",
                 () -> Loader.isModLoaded("scalinghealth"));
+        }
+        
+        if (enableLycanitesAttributionPatch) {
+            FermiumRegistryAPI.enqueueMixin(true, "mixins.tokcraftmixins.lycanitesmobs.json",
+                () -> Loader.isModLoaded("lycanitesmobs"));
+        }
+        
+        if (enableInfernalMobsScalingPatch) {
+            FermiumRegistryAPI.enqueueMixin(true, "mixins.tokcraftmixins.infernalmobs.json",
+                () -> Loader.isModLoaded("infernalmobs"));
         }
 
     }
