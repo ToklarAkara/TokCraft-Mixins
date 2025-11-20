@@ -11,9 +11,11 @@ import com.toklar.tokcraftmixins.helpers.BlocklistConfig;
 import com.toklar.tokcraftmixins.mixin.vanilla.MixinEntityLivingBase;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.Map;
 import com.toklar.tokcraftmixins.AttributionConfig;
 import com.toklar.tokcraftmixins.config.InfernalTierScaling;
+import com.toklar.tokcraftmixins.config.SocketBlacklist;
 
 @IFMLLoadingPlugin.MCVersion("1.12.2")
 @IFMLLoadingPlugin.Name("TokCraftMixinsCore")
@@ -41,7 +43,7 @@ public class TokCraftMixinsCore implements IFMLLoadingPlugin {
         	    "Fixes healing bug in hot spring water");
 
         	final boolean enableSocketed = config.getBoolean("EnableSocketedMixins", Configuration.CATEGORY_GENERAL, true,
-        	    "Resolves JER crashing when checking socketable gear");
+        	    "Resolves JER crashing when checking socketable gear. Adds socket blacklist");
 
         	//final boolean enableCTSetBonus = config.getBoolean("EnableCTSetBonusMixins", Configuration.CATEGORY_GENERAL, false,
 //        	    "Enable CTSetBonus mixins.");
@@ -58,8 +60,8 @@ public class TokCraftMixinsCore implements IFMLLoadingPlugin {
         	final boolean enableBlightKillPatch = config.getBoolean("EnableBlightKillPatchMixin", Configuration.CATEGORY_GENERAL, true,
         		    "Overrides Scaling Health Blight kill logic to allow summon-based heart drops when wearing bronze or toklar armor.");
         	
-        	final boolean enableLycanitesAttributionPatch = config.getBoolean("EnableLycanitesAttributionPatchMixin", Configuration.CATEGORY_GENERAL, true,
-        		    "Overrides Lycanites GameEventListener attribution so summon kills are credited to the player owner.");
+      //  	final boolean enableLycanitesAttributionPatch = config.getBoolean("EnableLycanitesAttributionPatchMixin", Configuration.CATEGORY_GENERAL, true,
+      //  		    "Overrides Lycanites GameEventListener attribution so summon kills are credited to the player owner.");
 
         	final boolean enableVanillaAttributionPatch = config.getBoolean("EnableVanillaAttributionPatchMixin",Configuration.CATEGORY_GENERAL,true,
         		    "Injects into EntityLivingBase.onDeath so summon kills are credited to the player owner.");
@@ -91,7 +93,19 @@ public class TokCraftMixinsCore implements IFMLLoadingPlugin {
         	        }
         	    }
         	}
+        	
+        	final String[] socketBlacklistEntries = config.getStringList(
+        		    "SocketBlacklist",
+        		    "socketed",
+        		    new String[] {}, // empty default
+        		    "List of item registry IDs that should never be socketed."
+        		);
+        		SocketBlacklist.loadFromConfig(Arrays.asList(socketBlacklistEntries));
 
+
+        	
+        	SocketBlacklist.loadFromConfig(Arrays.asList(socketBlacklistEntries));
+        	
         config.save();
 
         if (enableDisenchanter) {
@@ -131,10 +145,10 @@ public class TokCraftMixinsCore implements IFMLLoadingPlugin {
                 () -> Loader.isModLoaded("scalinghealth"));
         }
         
-        if (enableLycanitesAttributionPatch) {
-            FermiumRegistryAPI.enqueueMixin(true, "mixins.tokcraftmixins.lycanitesmobs.json",
-                () -> Loader.isModLoaded("lycanitesmobs"));
-        }
+//        if (enableLycanitesAttributionPatch) {
+//            FermiumRegistryAPI.enqueueMixin(true, "mixins.tokcraftmixins.lycanitesmobs.json",
+//                () -> Loader.isModLoaded("lycanitesmobs"));
+//        }
         
         if (enableInfernalMobsScalingPatch) {
             FermiumRegistryAPI.enqueueMixin(true, "mixins.tokcraftmixins.infernalmobs.json",
