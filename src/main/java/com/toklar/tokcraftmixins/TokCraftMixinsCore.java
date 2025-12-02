@@ -69,6 +69,8 @@ public class TokCraftMixinsCore implements IFMLLoadingPlugin {
         	final boolean enableInfernalMobsScalingPatch = config.getBoolean("EnableInfernalMobsScalingPatchMixin", Configuration.CATEGORY_GENERAL, true,
         		    "Injects into InfernalMobsCore.processEntitySpawn so rarity divisors scale with ScalingHealth difficulty.(configurable)");
 
+        	final boolean enableImbuementAltarBreakableMixin = config.getBoolean("EnableImbuementAltarBreakableMixin", Configuration.CATEGORY_GENERAL, true,
+        	        "Allow Breakable Ebwizardry Imbuement Altar.");
 
         	AttributionConfig.ENABLE_VANILLA_ATTRIBUTION_PATCH = enableVanillaAttributionPatch;
 
@@ -153,6 +155,11 @@ public class TokCraftMixinsCore implements IFMLLoadingPlugin {
         if (enableInfernalMobsScalingPatch) {
             FermiumRegistryAPI.enqueueMixin(true, "mixins.tokcraftmixins.infernalmobs.json",
                 () -> Loader.isModLoaded("infernalmobs"));
+        }
+        
+        if (enableImbuementAltarBreakableMixin) {
+            FermiumRegistryAPI.enqueueMixin(true, "mixins.tokcraftmixins.ebwizardry.json",
+                () -> Loader.isModLoaded("ebwizardry"));
         }
 
     }
