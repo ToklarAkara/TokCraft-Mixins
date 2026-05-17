@@ -81,6 +81,7 @@ dependencies {
     implementation name: 'ElectroblobsWizardry-4.3.15-t'
     implementation name: 'WizardryUtils-1.12.2-1.2.3'
     implementation name: 'InfernalMobs-1.12.2'
+    implementation name: 'Better End-1.1.1-t1.0-1.12.2'
 }
 
 mixin {

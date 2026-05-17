@@ -13,8 +13,10 @@ import com.toklar.tokcraftmixins.mixin.vanilla.MixinEntityLivingBase;
 import java.io.File;
 import java.util.Arrays;
 import java.util.Map;
-import com.toklar.tokcraftmixins.AttributionConfig;
+
+import com.toklar.tokcraftmixins.config.AttributionConfig;
 import com.toklar.tokcraftmixins.config.InfernalTierScaling;
+import com.toklar.tokcraftmixins.config.NightVisionConfig;
 import com.toklar.tokcraftmixins.config.SocketBlacklist;
 
 @IFMLLoadingPlugin.MCVersion("1.12.2")
@@ -65,6 +67,10 @@ public class TokCraftMixinsCore implements IFMLLoadingPlugin {
 
         	final boolean enableVanillaAttributionPatch = config.getBoolean("EnableVanillaAttributionPatchMixin",Configuration.CATEGORY_GENERAL,true,
         		    "Injects into EntityLivingBase.onDeath so summon kills are credited to the player owner.");
+        	
+        	final boolean enableNightVisionPatch = config.getBoolean("EnableNightVisionPatchMixin",Configuration.CATEGORY_GENERAL,true,
+                    "Weakens Night Vision so it no longer forces fullbright.");
+
 
         	final boolean enableInfernalMobsScalingPatch = config.getBoolean("EnableInfernalMobsScalingPatchMixin", Configuration.CATEGORY_GENERAL, true,
         		    "Injects into InfernalMobsCore.processEntitySpawn so rarity divisors scale with ScalingHealth difficulty.(configurable)");
@@ -72,7 +78,20 @@ public class TokCraftMixinsCore implements IFMLLoadingPlugin {
         	final boolean enableImbuementAltarBreakableMixin = config.getBoolean("EnableImbuementAltarBreakableMixin", Configuration.CATEGORY_GENERAL, true,
         	        "Allow Breakable Ebwizardry Imbuement Altar.");
 
+        	final float nightVisionFactor = config.getFloat(
+        		    "NightVisionFactor",
+        		    Configuration.CATEGORY_GENERAL,
+        		    0.4F,
+        		    0.0F,
+        		    1.0F,
+        		    "Multiplier for Night Vision brightness (0.0 = no brightness, 1.0 = vanilla brightness)."
+        		);
+        	
         	AttributionConfig.ENABLE_VANILLA_ATTRIBUTION_PATCH = enableVanillaAttributionPatch;
+        	NightVisionConfig.ENABLE_NIGHT_VISION_PATCH = enableNightVisionPatch;
+        	NightVisionConfig.NIGHT_VISION_FACTOR = nightVisionFactor;
+
+
 
         	final String[] infernalTierSpawnModifiers = config.getStringList(
         		    "InfernalTierSpawnModifiers",

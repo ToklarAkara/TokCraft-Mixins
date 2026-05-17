@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.toklar.tokcraftmixins.AttributionConfig; 
+import com.toklar.tokcraftmixins.config.AttributionConfig;
 import com.toklar.tokcraftmixins.helpers.SummonDamageBuffHandlerProxy;
 
 @Mixin(EntityLivingBase.class)

@@ -6,14 +6,15 @@ import com.toklar.tokcraftmixins.proxy.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
 @Mod(modid = TokCraftMixins.MODID, name = TokCraftMixins.NAME, version = TokCraftMixins.VERSION)
 public class TokCraftMixins {
     public static final String MODID = "tokcraftmixins";
-    public static final String NAME = "TokCraft Mixins";
-    public static final String VERSION = "1.10.0";
+    public static final String NAME = "KaraCraft Mixins";
+    public static final String VERSION = "1.12.0";
 
     @SidedProxy(
         clientSide = "com.toklar.tokcraftmixins.proxy.ClientProxy",
@@ -33,4 +34,10 @@ public class TokCraftMixins {
         proxy.init(event);
 
     }
+    
+    @Mod.EventHandler
+    public void postInit(FMLPostInitializationEvent event) {
+        com.toklar.tokcraftmixins.betterend.BetterEndInfusionInjector.inject();
+    }
+    
 }

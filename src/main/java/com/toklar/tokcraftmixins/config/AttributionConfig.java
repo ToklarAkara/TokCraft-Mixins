@@ -1,4 +1,4 @@
-package com.toklar.tokcraftmixins;
+package com.toklar.tokcraftmixins.config;
 
 public final class AttributionConfig {
     private AttributionConfig() {}
