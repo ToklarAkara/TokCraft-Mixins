@@ -77,6 +77,9 @@ public class TokCraftMixinsCore implements IFMLLoadingPlugin {
 
         	final boolean enableImbuementAltarBreakableMixin = config.getBoolean("EnableImbuementAltarBreakableMixin", Configuration.CATEGORY_GENERAL, true,
         	        "Allow Breakable Ebwizardry Imbuement Altar.");
+        	
+        	final boolean enableNyxEnchantingExtensionMixin = config.getBoolean("EnableNyxEnchantingExtensionMixin",
+        	        Configuration.CATEGORY_GENERAL, true, "Extend Nyx day-enchanting to other enchanting.");
 
         	final float nightVisionFactor = config.getFloat(
         		    "NightVisionFactor",
@@ -137,6 +140,11 @@ public class TokCraftMixinsCore implements IFMLLoadingPlugin {
         if (enableBOP) {
             FermiumRegistryAPI.enqueueMixin(true, "mixins.tokcraftmixins.biomesoplenty.json",
                 () -> Loader.isModLoaded("biomesoplenty"));
+        }
+
+        if (enableNyxEnchantingExtensionMixin) {
+            FermiumRegistryAPI.enqueueMixin(true, "mixins.tokcraftmixins.nyx.json",
+                () -> Loader.isModLoaded("nyx"));
         }
 
         if (enableSocketed) {
