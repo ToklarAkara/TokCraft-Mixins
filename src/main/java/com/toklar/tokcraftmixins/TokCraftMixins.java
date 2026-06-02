@@ -9,12 +9,15 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.common.MinecraftForge;
+import com.toklar.tokcraftmixins.baubles.MaskBaubleEventHandler;
+
 
 @Mod(modid = TokCraftMixins.MODID, name = TokCraftMixins.NAME, version = TokCraftMixins.VERSION)
 public class TokCraftMixins {
     public static final String MODID = "tokcraftmixins";
     public static final String NAME = "KaraCraft Mixins";
-    public static final String VERSION = "1.13.1";
+    public static final String VERSION = "1.14.7";
 
     @SidedProxy(
         clientSide = "com.toklar.tokcraftmixins.proxy.ClientProxy",
@@ -24,6 +27,7 @@ public class TokCraftMixins {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+    	MinecraftForge.EVENT_BUS.register(new MaskBaubleEventHandler());
         System.out.println("TokCraft Mixins loaded.");
         proxy.preInit(event);
         ForgeRegistries.ITEMS.register(ItemDummy.INSTANCE);

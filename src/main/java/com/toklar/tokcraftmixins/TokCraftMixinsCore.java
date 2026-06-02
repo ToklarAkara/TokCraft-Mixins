@@ -71,6 +71,8 @@ public class TokCraftMixinsCore implements IFMLLoadingPlugin {
         	final boolean enableNightVisionPatch = config.getBoolean("EnableNightVisionPatchMixin",Configuration.CATEGORY_GENERAL,true,
                     "Weakens Night Vision so it no longer forces fullbright.");
 
+//        	final boolean enableMowziesMaskBaublePatch = config.getBoolean("EnableMowziesMaskBaublePatch",Configuration.CATEGORY_GENERAL,true,
+//        	        "Allows Barakoa masks to function and render when worn as Baubles.");
 
         	final boolean enableInfernalMobsScalingPatch = config.getBoolean("EnableInfernalMobsScalingPatchMixin", Configuration.CATEGORY_GENERAL, true,
         		    "Injects into InfernalMobsCore.processEntitySpawn so rarity divisors scale with ScalingHealth difficulty.(configurable)");
@@ -132,6 +134,7 @@ public class TokCraftMixinsCore implements IFMLLoadingPlugin {
         	
         config.save();
 
+
         if (enableDisenchanter) {
             FermiumRegistryAPI.enqueueMixin(true, "mixins.tokcraftmixins.disenchanter.json",
                 () -> Loader.isModLoaded("disenchanter"));
@@ -141,6 +144,8 @@ public class TokCraftMixinsCore implements IFMLLoadingPlugin {
             FermiumRegistryAPI.enqueueMixin(true, "mixins.tokcraftmixins.biomesoplenty.json",
                 () -> Loader.isModLoaded("biomesoplenty"));
         }
+
+
 
         if (enableNyxEnchantingExtensionMixin) {
             FermiumRegistryAPI.enqueueMixin(true, "mixins.tokcraftmixins.nyx.json",

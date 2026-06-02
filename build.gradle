@@ -85,6 +85,8 @@ dependencies {
     implementation name: 'Nyx-1.4.2'
     implementation name: 'EnchantingPlus-1.12.2-5.0.176'
     implementation name: 'Bookshelf-1.12.2-2.3.590'
+    implementation name: 'mowziesmobs-1.5.8'
+    implementation name: 'Baubles-1.12-1.5.2'
 }
 
 mixin {
