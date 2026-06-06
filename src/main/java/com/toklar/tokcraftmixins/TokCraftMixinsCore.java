@@ -77,6 +77,9 @@ public class TokCraftMixinsCore implements IFMLLoadingPlugin {
         	final boolean enableInfernalMobsScalingPatch = config.getBoolean("EnableInfernalMobsScalingPatchMixin", Configuration.CATEGORY_GENERAL, true,
         		    "Injects into InfernalMobsCore.processEntitySpawn so rarity divisors scale with ScalingHealth difficulty.(configurable)");
 
+        	final boolean enableKGearsNerfs = config.getBoolean("EnableKGearsNerfsMixin",Configuration.CATEGORY_GENERAL, true,
+        		    "Enables the K-Gears ability nerf mixin.");
+
         	final boolean enableImbuementAltarBreakableMixin = config.getBoolean("EnableImbuementAltarBreakableMixin", Configuration.CATEGORY_GENERAL, true,
         	        "Allow Breakable Ebwizardry Imbuement Altar.");
         	
@@ -145,6 +148,10 @@ public class TokCraftMixinsCore implements IFMLLoadingPlugin {
                 () -> Loader.isModLoaded("biomesoplenty"));
         }
 
+        if (enableKGearsNerfs) {
+            FermiumRegistryAPI.enqueueMixin(true, "mixins.tokcraftmixins.kgears.json",
+                () -> Loader.isModLoaded("kgears"));
+        }
 
 
         if (enableNyxEnchantingExtensionMixin) {

@@ -87,6 +87,7 @@ dependencies {
     implementation name: 'Bookshelf-1.12.2-2.3.590'
     implementation name: 'mowziesmobs-1.5.8'
     implementation name: 'Baubles-1.12-1.5.2'
+    implementation name: 'KeletuGears-1.3.0'
 }
 
 mixin {
